@@ -1,0 +1,20 @@
+workflows:
+  test-workflow:
+    name: Test osv-scanner
+    max_build_duration: 60
+    environment:   
+      flutter: 3.35.0
+    scripts:
+      - name: Get dependencies
+        script: |
+          echo "Get dependencies"
+          flutter packages pub get    
+      - name: Run osv scanner
+        script: |
+          chmod +x ci_scripts/script.sh
+          ./ci_scripts/script.sh
+    publishing:
+      email:
+        recipients:
+          - tmovlian@gmail.com          
+          - tetiana.movlian@solid.software
