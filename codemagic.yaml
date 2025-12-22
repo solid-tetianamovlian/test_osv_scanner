@@ -29,14 +29,11 @@ workflows:
       branch_patterns:
         - pattern: 'main'
           include: true
-          source: false 
-      scripts:
-        - name: Get dependencies
-          script: |
-            echo "Get dependencies"
-            flutter packages pub get 
-        - name: Run code generation
-          script: |
-            flutter pub run build_runner build --delete-conflicting-outputs
-        - name: Run Flutter tests
-          script: flutter test --coverage
+          source: false
+    scripts:
+      - name: Get dependencies
+        script: flutter pub get
+      - name: Run code generation
+        script: flutter pub run build_runner build --delete-conflicting-outputs
+      - name: Run Flutter tests
+        script: flutter test --coverage
