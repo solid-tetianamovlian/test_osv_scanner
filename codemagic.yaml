@@ -45,7 +45,12 @@ workflows:
     environment:
       flutter: 3.35.0
     triggering:
-      pull_request: true   # <-- triggers on ALL PRs
+    events:
+      - pull_request
+    branch_patterns:
+      - pattern: 'main'
+        include: true
+        source: false  
     scripts:
       - name: Get dependencies
         script: flutter pub get
