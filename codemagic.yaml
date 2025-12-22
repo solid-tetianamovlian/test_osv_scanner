@@ -18,3 +18,25 @@ workflows:
         recipients:
           - tmovlian@gmail.com          
           - tetiana.movlian@solid.software
+  flutter_tests_pr:
+    name: Flutter tests (Pull Requests)
+    max_build_duration: 60
+    environment:   
+      flutter: 3.35.0
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: "*"
+          include: true
+      pull_request: true 
+      scripts:
+        - name: Get dependencies
+          script: |
+            echo "Get dependencies"
+            flutter packages pub get 
+        - name: Run code generation
+          script: |
+            flutter pub run build_runner build --delete-conflicting-outputs
+        - name: Run Flutter tests
+          script: flutter test --coverage
